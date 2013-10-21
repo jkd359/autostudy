@@ -1,7 +1,9 @@
 class User < ActiveRecord::Base
+  has_one :user_profile
+  has_many :contents
+  has_many :user_courses
+  has_many :courses, through: :user_courses
   rolify
-  attr_accessible :role_ids, :as => :admin
-  attr_accessible :provider, :uid, :name, :email
   validates_presence_of :name
 
   def self.create_with_omniauth(auth)
